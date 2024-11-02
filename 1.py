@@ -1,3 +1,0 @@
-print("SSSSs")
-
-print("slkdnewidbwe")
