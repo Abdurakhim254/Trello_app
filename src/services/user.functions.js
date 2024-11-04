@@ -27,16 +27,16 @@ export const getuserbyemail=async(email)=>{
 
 export const createuser=async(name,email,password)=>{
     try{
-        const result=await client.query("Insert into users(name,email,password) Values($1,$2,$3)",[name,email,password])
-        return "User yaratildi"
+        const result=await client.query("Insert into users(name,email,password) Values($1,$2,$3) returning *",[name,email,password])
+        return result.rows
     }catch(error){
         return error.message
     }
 }
 export const updateuser=async(name,email,password,id)=>{
     try {
-        await client.query("Update users set name=$1,email=$2,password=$3 where id=$4",[name,email,password,id])
-        return "User yangilandi"
+        const result=await client.query("Update users set name=$1,email=$2,password=$3 where id=$4 returning *",[name,email,password,id])
+        return result.rows
     } catch (error) {
         return "Userni yangilashda xatolik"
     }

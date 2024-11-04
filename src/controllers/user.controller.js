@@ -7,6 +7,7 @@ export const registerUser=async(req,res)=>{
         const hashpassword=await bcrypt.hash(password,salt)
         password=hashpassword
         const data=await createuser(name,email,password)
+        delete data[0].password
         res.status(200).send(data)
     } catch (error) {
         res.status(400).send("Registratsiyada xatolik")
@@ -43,6 +44,7 @@ export const getUserByid=async(req,res)=>{
     try {
         const id=+req.params.id
         const data=await getuserbyid(id)
+        delete data[0].password
         res.status(200).send(data)
     } catch (error) {
         res.status(400).send("Userni olib kelishda xatolik")
@@ -57,6 +59,7 @@ export const updateUserByid=async(req,res)=>{
         const hashpassword=await bcrypt.hash(password,salt)
         password=hashpassword
         const data=await updateuser(name,email,password,id)
+        delete data[0].password 
         res.status(200).send(data)
     } catch (error) {
         res.status(400).send("Userni yangilashda xatolik")

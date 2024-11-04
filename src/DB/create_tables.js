@@ -34,9 +34,9 @@ export const create_tables=async()=>{
         for (const iterator of table_query) {
             await client.query(iterator)
         }
-        console.log("Table yaratildi")
+        return "Table yaratildi"
     } catch (error) {
-        console.error("Table allaqachon yaratilgan")
+        return "Table allaqachon yaratilgan"
     }    
 }
 await create_tables()

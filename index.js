@@ -12,8 +12,8 @@ app.use("/tasks",taskRouter)
 
 
 app.use("/setup",async(req,res)=>{
-	await create_tables()
-	res.send("ok")
+	let data=await create_tables()
+	res.send(data)
 })
 
 const PORT=application.port
